@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <title>Lugx - The Sims 4</title>
+    {% set static_url = url_for('static', filename='') %}
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='assets/images/icon.png') }}" />
+
+    <!-- Bootstrap core CSS -->
+    <link href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" />
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/fontawesome.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/templatemo-lugx-gaming.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/owl.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='assets/css/animate.css') }}" />
+
+    <!-- External CSS File -->
+    <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+    <!--
+
+TemplateMo 589 lugx gaming
+
+https://templatemo.com/tm-589-lugx-gaming
+
+-->
+  </head>
+
+  <body>
+    <!-- ***** Preloader Start ***** -->
+    <div id="js-preloader" class="js-preloader">
+      <div class="preloader-inner">
+        <span class="dot"></span>
+        <div class="dots">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </div>
+    <!-- ***** Preloader End ***** -->
+
+    <!-- ***** Header Area Start ***** -->
+    <header class="header-area header-sticky">
+      <div class="container">
+        <div class="row">
+          <div class="col-12">
+            <nav class="main-nav">
+              <!-- ***** Logo Start ***** -->
+              <a href="index.html" class="logo">
+                <img src="{{ static_url }}assets/images/logo.png" alt="" style="width: 158px" />
+              </a>
+              <!-- ***** Logo End ***** -->
+              <!-- ***** Menu Start ***** -->
+              <ul class="nav">
+                <li><a href="/">Home</a></li>
+                <li><a href="/catalog">Our Shop</a></li>
+                <li><a href="/login">Sign In</a></li>
+              </ul>
+              <a class="menu-trigger">
+                <span>Menu</span>
+              </a>
+              <!-- ***** Menu End ***** -->
+            </nav>
+          </div>
+        </div>
+      </div>
+    </header>
+    <!-- ***** Header Area End ***** -->
+
+    <div class="page-heading header-text">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <h3>The Sims 4</h3>
+            <span class="breadcrumb">Home > Shop > The Sims 4</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="single-product section">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6">
+            <div class="left-image">
+              <img src="{{ static_url }}assets/images/top-game-04.jpg" alt="" />
+            </div>
+          </div>
+          <div class="col-lg-6 align-self-center">
+            <h4>The Sims 4</h4>
+            <span class="price"><em>$90</em> $44</span>
+            <p>
+              Unleash your imagination and create a unique world of Sims that’s an expression of you. Choose how Sims look, act, and dress, then
+              decide how they’ll live out each day. Travel to different neighborhoods where you can meet other Sims
+              and learn about their lives. Tell your stories your way while developing relationships,
+              pursuing careers and life aspirations, and immersing yourself in this extraordinary game, where the
+              possibilities are endless.
+            </p>
+            <form id="qty" action="/login" method="GET">
+              <button type="submit">
+                  <i class="fa fa-shopping-bag"></i> Buy Now
+              </button>
+          </form>
+          
+            <ul>
+              <li><span>Game ID:</span> SMS</li>
+              <li><span>Genre:</span> Fantasy</li>
+              <li><span>Multi-tags:</span> Life, Sim, Family</li>
+            </ul>
+          </div>
+          <div class="col-lg-12">
+            <div class="sep"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="more-info">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="tabs-content">
+              <div class="row">
+                <div class="nav-wrapper">
+                  <ul class="nav nav-tabs" role="tablist">
+                    <li class="nav-item" role="presentation">
+                      <button
+                        class="nav-link active"
+                        id="reviews-tab"
+                        data-bs-toggle="tab"
+                        data-bs-target="#reviews"
+                        type="button"
+                        role="tab"
+                        aria-controls="reviews"
+                        aria-selected="false"
+                      >
+                        Reviews (3)
+                      </button>
+                    </li>
+                  </ul>
+                </div>
+                <div class="tab-content" id="myTabContent">
+                  <div class="tab-pane fade show active" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
+                    <p>
+                      This is a great game to DOWNLOAD and play. With so many character options you can create any type
+                      of Sim, even a FIT GIRL! You can also REPACK your belongings and move a new lot anytime. This game
+                      is a TORRENT of nonstop fun that i would recommend INSTEAD of similar titles!
+                      <br /><br />
+                      Amazing game and great that the base game is now free but please don't spend over £1k on
+                      micro-transaction on stuff that should be in the damn base game anyway. Just use a DLC unlocker
+                      instead, easy enough to find with a simple Google search.
+                      <br /><br />
+                      Fun game, you can do almost anything with your character. You can make yourself, your family,
+                      friends, or uhh.. your worst enemy and the moment they spawn in the fall into a trap that kills
+                      them. Like i said endless, almost anything you can imagine you can create.
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer>
+      <div class="container">
+        <div class="col-lg-12">
+          <p>
+            Copyright © 2048 LUGX Gaming Company. All rights reserved. &nbsp;&nbsp;
+            <a rel="nofollow" href="https://templatemo.com" target="_blank">Design: TemplateMo</a>
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Scripts -->
+    <!-- Bootstrap core JavaScript -->
+    <script src="{{ url_for('static', filename='vendor/jquery/jquery.min.js') }}"></script>
+
+    <!-- Bootstrap -->
+    <script src="{{ url_for('static', filename='vendor/bootstrap/js/bootstrap.min.js') }}"></script>
+
+    <!-- Additional JS Files -->
+    <script src="{{ url_for('static', filename='assets/js/isotope.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='assets/js/owl-carousel.js') }}"></script>
+    <script src="{{ url_for('static', filename='assets/js/counter.js') }}"></script>
+    <script src="{{ url_for('static', filename='assets/js/custom.js') }}"></script>
+  </body>
+</html>
