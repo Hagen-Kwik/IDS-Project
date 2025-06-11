@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Network Traffic Monitor - Detailed Logs</title>
+    <meta name="description" content="" />
+    <meta name="author" content="templatemo" />
+   
+    <link
+      href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,400italic,700"
+      rel="stylesheet"
+      type="text/css"
+    />
+
+    {% set static_url = url_for('static', filename='') %}
+
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet" />
+    <link href="{{ url_for('static', filename='css/templatemo-style.css') }}" rel="stylesheet" />
+    <link href="{{ url_for('static', filename='css/font-awesome.min.css') }}" rel="stylesheet" />
+    <link href="{{ url_for('static', filename='css/myown.css') }}" rel="stylesheet" />
+ 
+    <style>
+      .table-container {
+        overflow-x: auto;
+        max-width: 100%;
+      }
+      .feature-cell {
+        max-width: 150px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .feature-cell:hover {
+        white-space: normal;
+        overflow: visible;
+        position: absolute;
+        z-index: 100;
+        background-color: white;
+        border: 1px solid #ddd;
+        padding: 8px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      }
+      .danger-row {
+        background-color: #ffdddd;
+      }
+      .warning-row {
+        background-color: #fff3cd;
+      }
+      .success-row {
+        background-color: #d4edda;
+      }
+    </style>
+
+    <script>
+      function fetchConnections() {
+        fetch("/get_connections")
+          .then((response) => response.json())
+          .then((data) => {
+            console.log("Fetched connection data:", data); // <-- Checker print
+            let tableBody = document.getElementById("connectionTableBody");
+            tableBody.innerHTML = "";
+    
+            data.forEach((conn, index) => {
+              // Determine row class based on threat level
+              let rowClass = "";
+              if (conn.num_failed_logins > 0 || conn.num_compromised > 0 || conn.num_root > 0) {
+                rowClass = "danger-row";
+              } else if (conn.hot > 0 || conn.num_shells > 0 || conn.num_access_files > 0) {
+                rowClass = "warning-row";
+              } else if (conn.logged_in === 1) {
+                rowClass = "success-row";
+              }
+
+              let row = `<tr class="${rowClass}">
+                            <td>${index + 1}</td>
+                            <td class="feature-cell">${conn.src_ip}</td>
+                            <td class="feature-cell">${conn.dst_ip}</td>
+                            <td>${conn.timestamp}</td>
+                            <td>${conn.protocol_type}</td>
+                            <td>${conn.service}</td>
+                            <td>${conn.flag}</td>
+                            <td>${conn.src_bytes}</td>
+                            <td>${conn.dst_bytes}</td>
+                            <td>${conn.duration.toFixed(2)}</td>
+                            <td>${conn.count}</td>
+                            <td>${conn.srv_count}</td>
+                            <td>${conn.same_srv_rate.toFixed(2)}</td>
+                            <td>${conn.diff_srv_rate.toFixed(2)}</td>
+                            <td>${conn.serror_rate.toFixed(2)}</td>
+                            <td>${conn.srv_serror_rate.toFixed(2)}</td>
+                            <td>${conn.rerror_rate.toFixed(2)}</td>
+                            <td>${conn.srv_rerror_rate.toFixed(2)}</td>
+                            <td>${conn.hot}</td>
+                            <td>${conn.num_failed_logins}</td>
+                            <td>${conn.logged_in}</td>
+                            <td>${conn.num_compromised}</td>
+                            <td>${conn.root_shell}</td>
+                            <td>${conn.su_attempted}</td>
+                            <td>${conn.num_root}</td>
+                            <td>${conn.num_file_creations}</td>
+                            <td>${conn.num_shells}</td>
+                            <td>${conn.num_access_files}</td>
+                            <td>${conn.num_outbound_cmds}</td>
+                            <td>${conn.is_hot_login}</td>
+                            <td>${conn.is_guest_login}</td>
+                        </tr>`;
+              tableBody.innerHTML += row;
+            });
+          })
+          .catch((error) => console.error("Error fetching connections:", error));
+      }
+    
+      // Run fetchConnections every 5 seconds
+      setInterval(fetchConnections, 5000);
+      fetchConnections(); // Load immediately on page load
+    </script>
+    
+  </head>
+  <body>
+    <!-- Left column -->
+    <div class="templatemo-flex-row">
+      <div class="templatemo-sidebar">
+        <header class="templatemo-site-header">
+          <div class="square"></div>
+          <h1>Network Monitor</h1>
+        </header>
+
+        <!-- Search box -->
+        <div class="mobile-menu-icon">
+          <i class="fa fa-bars"></i>
+        </div>
+        <nav class="templatemo-left-nav">
+          <ul>
+            <li>
+              <a href="/" class="active"><i class="fa fa-home fa-fw"></i>Dashboard</a>
+            </li>
+            <li>
+              <a href="/history"><i class="fa fa-bar-chart fa-fw"></i>History</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+      <!-- Main content -->
+      <div class="templatemo-content col-1 light-gray-bg">
+        <div class="templatemo-top-nav-container">
+          <div class="row">
+            <h1>Detailed Network Traffic Log</h1>
+            <p class="text-muted">Showing all captured network traffic with detailed features</p>
+          </div>
+        </div>
+        <div class="templatemo-content-container">
+          <div class="templatemo-content-widget no-padding">
+            <div class="panel panel-default table-responsive">
+              <div class="table-container">
+                <table class="table table-striped table-bordered templatemo-user-table">
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>Source IP</th>
+                      <th>Dest IP</th>
+                      <th>Timestamp</th>
+                      <th>Protocol</th>
+                      <th>Service</th>
+                      <th>Flags</th>
+                      <th>Src Bytes</th>
+                      <th>Dst Bytes</th>
+                      <th>Duration</th>
+                      <th>Count</th>
+                      <th>Srv Count</th>
+                      <th>Same Srv Rate</th>
+                      <th>Diff Srv Rate</th>
+                      <th>Serror Rate</th>
+                      <th>Srv Serror Rate</th>
+                      <th>Rerror Rate</th>
+                      <th>Srv Rerror Rate</th>
+                      <th>Hot</th>
+                      <th>Failed Logins</th>
+                      <th>Logged In</th>
+                      <th>Compromised</th>
+                      <th>Root Shell</th>
+                      <th>SU Attempted</th>
+                      <th>Root Access</th>
+                      <th>File Creations</th>
+                      <th>Shells</th>
+                      <th>Access Files</th>
+                      <th>Outbound Cmds</th>
+                      <th>Hot Login</th>
+                      <th>Guest Login</th>
+                    </tr>
+                  </thead>
+                  <tbody id="connectionTableBody">
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+
+          <div class="legend-container">
+            <div class="legend-item">
+              <div class="legend-color danger-row"></div>
+              <span>High Risk (root access, compromised, failed logins)</span>
+            </div>
+            <div class="legend-item">
+              <div class="legend-color warning-row"></div>
+              <span>Medium Risk (hot indicators, shells, file access)</span>
+            </div>
+            <div class="legend-item">
+              <div class="legend-color success-row"></div>
+              <span>Normal (successful logins)</span>
+            </div>
+          </div>
+
+          <footer class="text-right">
+            <p>Network Traffic Monitoring System | Real-time Analysis</p>
+          </footer>
+        </div>
+      </div>
+    </div>
+
+    <!-- JS -->
+    <script type="text/javascript" src="{{ url_for('static', filename='js/jquery-1.11.2.min.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/templatemo-script.js') }}"></script>
+  </body>
+</html>
+
+    <!-- TO LISTEN TO NEW ATTACKS DETECTED -->
+    <script>
+      document.addEventListener("keydown", function (event) {
+        if (event.key === "Enter") {
+          document.getElementById("attackPopup").style.display = "block";
+        }
+      });
+
+      function redirectToDetails() {
+        window.location.href = "/history"; // Replace with your actual page
+      }
+
+      function closePopup() {
+        document.getElementById("attackPopup").style.display = "none";
+      }
+    </script>
+  </body>
+</html>

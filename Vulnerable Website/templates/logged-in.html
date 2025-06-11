@@ -8,7 +8,7 @@
       rel="stylesheet"
     />
 
-    <title>Lugx - Sign In</title>
+    <title>Lugx - Dashboard</title>
     {% set static_url = url_for('static', filename='') %}
 
     <!-- Favicon -->
@@ -26,7 +26,32 @@
     <!-- External CSS File -->
     <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
 
-
+    <style>
+      .action-buttons {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+        justify-content: center;
+        margin-top: 30px;
+      }
+      .action-btn {
+        padding: 12px 25px;
+        background: linear-gradient(135deg, #6e8efb, #a777e3);
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-weight: 500;
+      }
+      .action-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      }
+      .action-btn.danger {
+        background: linear-gradient(135deg, #f53e3e, #f53e8a);
+      }
+    </style>
   </head>
 
   <body class="bg">
@@ -54,7 +79,6 @@
               <!-- ***** Logo End ***** -->
               <!-- ***** Menu Start ***** -->
               <ul class="nav">
-
                 <li><a href="/logout">Log Out</a></li>
               </ul>
               <a class="menu-trigger">
@@ -72,7 +96,15 @@
       <div class="container">
         <div class="row">
           <div class="col-lg-12 align-self-center">
-            <h3>Logged In</h3>
+            <h3>Dashboard</h3>
+            <div class="action-buttons">
+              <button class="action-btn" onclick="triggerEvent('root_shell_trigger')">Trigger Root Shell</button>
+              <button class="action-btn" onclick="triggerEvent('file_creation_trigger')">Trigger File Creation</button>
+              <button class="action-btn" onclick="triggerEvent('shell_trigger')">Trigger Unauthorized Shell</button>
+              <button class="action-btn" onclick="triggerEvent('access_file_trigger')">Trigger File Access</button>
+              <button class="action-btn" onclick="triggerEvent('su_attempt_trigger')">Trigger SU Attempt</button>
+            </div>
+            
             <div class="footer-login-register-special">
               <div class="container ">
                 <div class="col-lg-12">
@@ -83,25 +115,30 @@
                 </div>
               </div>
             </div>
-            </div>
           </div>
         </div>
       </div>
     </div>
 
-   
-
     <!-- Scripts -->
     <!-- Bootstrap core JavaScript -->
     <script src="{{ url_for('static', filename='vendor/jquery/jquery.min.js') }}"></script>
-
     <!-- Bootstrap -->
     <script src="{{ url_for('static', filename='vendor/bootstrap/js/bootstrap.min.js') }}"></script>
-
     <!-- Additional JS Files -->
     <script src="{{ url_for('static', filename='assets/js/isotope.min.js') }}"></script>
     <script src="{{ url_for('static', filename='assets/js/owl-carousel.js') }}"></script>
     <script src="{{ url_for('static', filename='assets/js/counter.js') }}"></script>
     <script src="{{ url_for('static', filename='assets/js/custom.js') }}"></script>
+    
+    <script>
+      function triggerEvent(route) {
+        // Show alert
+        alert("Payload has been sent");
+        
+        // Redirect to the route
+        window.location.href = '/' + route;
+      }
+    </script>
   </body>
 </html>
