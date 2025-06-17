@@ -1,1 +1,1 @@
-An Intrusion Detection System using AI & Neural Network
+An Intrusion Detection System using AI & ML
